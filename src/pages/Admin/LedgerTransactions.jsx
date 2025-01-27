@@ -148,8 +148,8 @@ const LedgerTransactions = () => {
       selector: row => row.balance,
       sortable: true,
       cell: row => (
-        <span className={row.balance >= 0 ? 'text-green-600' : 'text-red-600'}>
-          ${Math.abs(row.balance).toFixed(2)}
+        <span className={row.balance >= 0 ? 'text-red-600' : 'text-green-600'}>
+          {row.balance >= 0 ? '-' : '+'} ${Math.abs(row.balance).toFixed(2)}
         </span>
       ),
     },

@@ -60,8 +60,8 @@ const LedgerCard = ({ ledger, onEdit, onDelete, onViewTransactions }) => {
         </div>
         <div className="text-center">
           <p className="text-sm text-gray-600">Balance</p>
-          <p className={`text-lg font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
-            ${Math.abs(ledger.balance)}
+          <p className={`text-lg font-semibold ${isPositive ? 'text-red-600' : 'text-green-600'}`}>
+            {isPositive ? '-' : '+'} ${Math.abs(ledger.balance)}
           </p>
         </div>
       </div>
