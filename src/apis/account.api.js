@@ -95,7 +95,7 @@ export const updateAccount = async ({ id, ...accountData }) => {
 };
 
 export const getAccountLedgers = async (accountId) => {
-  const { data } = await api.get(`/ledgers/?account=${accountId}`);
+  const { data } = await api.get(`/ledgers/?account_id=${accountId}`);
   return data;
 };
 
@@ -115,7 +115,7 @@ export const deleteLedger = async (id) => {
 };
 
 export const getLedgerTransactions = async (ledgerId) => {
-  const { data } = await api.get(`/transactions/?ledger=${ledgerId}`);
+  const { data } = await api.get(`/transactions/?ledger_id=${ledgerId}`);
   return data;
 };
 

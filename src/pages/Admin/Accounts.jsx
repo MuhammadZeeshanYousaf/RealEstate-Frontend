@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { getAccounts, createAccount, updateAccount } from "../../apis/account.api";
 import Modal from "../../components/shared/Modal";
 import Loader from "../../components/shared/Loader";
+import PageHeader from "../../components/shared/PageHeader";
 
 const gradients = [
   "from-blue-500 to-purple-500",
@@ -144,8 +145,7 @@ const Accounts = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Accounts</h1>
+      <PageHeader title="Accounts">
         <button
           onClick={() => setIsModalOpen(true)}
           className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
@@ -153,7 +153,7 @@ const Accounts = () => {
           <FaPlus className="mr-2" />
           Create Account
         </button>
-      </div>
+      </PageHeader>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {accounts?.map((account, index) => (

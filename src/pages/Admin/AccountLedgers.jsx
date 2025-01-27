@@ -11,6 +11,7 @@ import {
 } from "../../apis/account.api";
 import Modal from "../../components/shared/Modal";
 import Loader from "../../components/shared/Loader";
+import PageHeader from "../../components/shared/PageHeader";
 
 const LedgerCard = ({ ledger, onEdit, onDelete, onViewTransactions }) => {
   const isPositive = ledger.balance >= 0;
@@ -47,13 +48,13 @@ const LedgerCard = ({ ledger, onEdit, onDelete, onViewTransactions }) => {
       <div className="grid grid-cols-3 gap-4 mt-4">
         <div className="text-center">
           <p className="text-sm text-gray-600">Debit Total</p>
-          <p className="text-lg font-semibold text-green-600">
+          <p className="text-lg font-semibold text-red-600">
             ${ledger.debit_total}
           </p>
         </div>
         <div className="text-center">
           <p className="text-sm text-gray-600">Credit Total</p>
-          <p className="text-lg font-semibold text-red-600">
+          <p className="text-lg font-semibold text-green-600">
             ${ledger.credit_total}
           </p>
         </div>
@@ -117,6 +118,7 @@ const AccountLedgers = () => {
   const { data: ledgers, isLoading } = useQuery({
     queryKey: ["ledgers", accountId],
     queryFn: () => getAccountLedgers(accountId),
+    enabled: !!accountId,
   });
 
   const createMutation = useMutation({
@@ -187,8 +189,7 @@ const AccountLedgers = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Account Ledgers</h1>
+      <PageHeader title="Account Ledgers">
         <button
           onClick={() => setIsModalOpen(true)}
           className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
@@ -196,7 +197,7 @@ const AccountLedgers = () => {
           <FaPlus className="mr-2" />
           Create Ledger
         </button>
-      </div>
+      </PageHeader>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {ledgers?.map((ledger) => (

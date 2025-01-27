@@ -11,6 +11,7 @@ import {
 } from "../../apis/account.api";
 import Modal from "../../components/shared/Modal";
 import Loader from "../../components/shared/Loader";
+import PageHeader from "../../components/shared/PageHeader";
 
 const TransactionForm = ({ transaction, ledgerId, onSubmit, onClose }) => {
   const [formData, setFormData] = useState({
@@ -126,7 +127,7 @@ const LedgerTransactions = () => {
       sortable: true,
       cell: row => (
         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-          row.type === 'debit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+          row.type === 'credit' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
         }`}>
           {row.type.charAt(0).toUpperCase() + row.type.slice(1)}
         </span>
@@ -136,7 +137,11 @@ const LedgerTransactions = () => {
       name: "Amount",
       selector: row => row.amount,
       sortable: true,
-      cell: row => `$${parseFloat(row.amount).toFixed(2)}`,
+      cell: row => (
+        <span className={row.type === 'credit' ? 'text-green-600' : 'text-red-600'}>
+          ${parseFloat(row.amount).toFixed(2)}
+        </span>
+      ),
     },
     {
       name: "Balance",
@@ -164,6 +169,7 @@ const LedgerTransactions = () => {
   const { data: transactions, isLoading } = useQuery({
     queryKey: ["transactions", ledgerId],
     queryFn: () => getLedgerTransactions(ledgerId),
+    enabled: !!ledgerId,
   });
 
   const createMutation = useMutation({
@@ -213,8 +219,7 @@ const LedgerTransactions = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Ledger Transactions</h1>
+      <PageHeader title="Ledger Transactions">
         <button
           onClick={() => setIsModalOpen(true)}
           className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
@@ -222,7 +227,7 @@ const LedgerTransactions = () => {
           <FaPlus className="mr-2" />
           Add Transaction
         </button>
-      </div>
+      </PageHeader>
 
       <DataTable
         columns={columns}
