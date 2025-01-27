@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { FaUser, FaHome, FaCog, FaDollarSign, FaFileInvoice, FaChartBar } from 'react-icons/fa';
+import { FaUser, FaHome, FaCog, FaDollarSign, FaFileInvoice, FaChartBar, FaBookOpen } from 'react-icons/fa';
 
 const UserLayout = ({ children }) => {
   const location = useLocation();
@@ -15,7 +15,8 @@ const UserLayout = ({ children }) => {
     sideNavLinks.push(
       { children: "Properties", to: "/admin/properties", icon: <FaHome /> },
       { children: "Agreements", to: "/admin/agreements", icon: <FaFileInvoice /> },
-      { children: "Customers", to: "/admin/customers", icon: <FaUser /> }
+      { children: "Customers", to: "/admin/customers", icon: <FaUser /> },
+      { children: "Accounts", to: "/admin/accounts", icon: <FaBookOpen /> }
     );
   } else {
     sideNavLinks.push(

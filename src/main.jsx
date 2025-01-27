@@ -37,6 +37,9 @@ import UserUtilityBills from './pages/Customer/UtilityBills'
 import PaymentsList from "./pages/User/PaymentsList";
 import UtilityBillsList from "./pages/User/UtilityBillsList";
 import Dashboard from './pages/Admin/Dashboard';
+import Accounts from './pages/Admin/Accounts.jsx';
+import AccountLedgers from './pages/Admin/AccountLedgers.jsx';
+import LedgerTransactions from './pages/Admin/LedgerTransactions.jsx';
 
 export const queryClient = new QueryClient()
 
@@ -64,6 +67,9 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="agreements/:id/payments/create" element={<PaymentForm />} />
       <Route path="agreements/:id/utility-bills/create" element={<UtilityBillForm />} />
       <Route path="profile/edit" element={<ProfileUpdateForm />} />
+      <Route path="accounts" element={<Accounts />} />
+      <Route path="accounts/:accountId/ledgers" element={<AccountLedgers />} />
+      <Route path="accounts/:accountId/ledgers/:ledgerId/transactions" element={<LedgerTransactions />} />
     </Route>
     <Route path="user" element={<Authenticated />}>
       <Route path="profile" element={<Profile />} />

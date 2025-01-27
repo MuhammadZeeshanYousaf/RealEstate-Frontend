@@ -78,3 +78,53 @@ export const changePassword = async (passwordData) => {
     } else throw new Error(err);
   }
 };
+
+export const getAccounts = async () => {
+  const { data } = await api.get("/accounts/");
+  return data;
+};
+
+export const createAccount = async (accountData) => {
+  const { data } = await api.post("/accounts/", accountData);
+  return data;
+};
+
+export const updateAccount = async ({ id, ...accountData }) => {
+  const { data } = await api.put(`/accounts/${id}/`, accountData);
+  return data;
+};
+
+export const getAccountLedgers = async (accountId) => {
+  const { data } = await api.get(`/ledgers/?account=${accountId}`);
+  return data;
+};
+
+export const createLedger = async (ledgerData) => {
+  const { data } = await api.post("/ledgers/", ledgerData);
+  return data;
+};
+
+export const updateLedger = async ({ id, ...ledgerData }) => {
+  const { data } = await api.put(`/ledgers/${id}/`, ledgerData);
+  return data;
+};
+
+export const deleteLedger = async (id) => {
+  const { data } = await api.delete(`/ledgers/${id}/`);
+  return data;
+};
+
+export const getLedgerTransactions = async (ledgerId) => {
+  const { data } = await api.get(`/transactions/?ledger=${ledgerId}`);
+  return data;
+};
+
+export const createTransaction = async (transactionData) => {
+  const { data } = await api.post("/transactions/", transactionData);
+  return data;
+};
+
+export const updateTransaction = async ({ id, ...transactionData }) => {
+  const { data } = await api.put(`/transactions/${id}/`, transactionData);
+  return data;
+};
